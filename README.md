@@ -3,7 +3,12 @@
 
 - create-react-app
 - configure tailwind
-
+- routng
+- header
+- sign in form
+- sign up form
+- form valiation for sign in/up
+- useRef hook
 
 
 
