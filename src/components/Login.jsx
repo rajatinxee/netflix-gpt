@@ -12,13 +12,14 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage(null);
   };
 
   const handleButtonClick = () => {
     // validation
     // console.log("email", email.current.value);
     // console.log("password", password.current.value);
-    const fullNameValue = fullname.current ? fullname.current.value : null;
+    const fullNameValue = !isSignInForm ? fullname.current.value : null;
     const message = checkValidData(fullNameValue ,email.current.value, password.current.value);
     // console.log(message);
     setErrorMessage(message);

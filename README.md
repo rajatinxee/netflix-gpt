@@ -27,3 +27,13 @@
 
 - Netflix Gpt
     - search bar (movie suggestion)
+
+
+
+
+
+
+
+
+
+npm install -g firebase-tools
