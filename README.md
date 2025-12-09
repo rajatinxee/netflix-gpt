@@ -9,7 +9,12 @@
 - sign up form
 - form valiation for sign in/up
 - useRef hook
-
+- firebase setup
+- deploying app to prod
+- create sign up user account
+- implement sign in user api
+- created redux store with user slice
+- 
 
 
 # FEATURES

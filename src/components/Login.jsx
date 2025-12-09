@@ -1,8 +1,19 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validation";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/Redux/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -20,9 +31,89 @@ const Login = () => {
     // console.log("email", email.current.value);
     // console.log("password", password.current.value);
     const fullNameValue = !isSignInForm ? fullname.current.value : null;
-    const message = checkValidData(fullNameValue ,email.current.value, password.current.value);
+    const message = checkValidData(
+      fullNameValue,
+      email.current.value,
+      password.current.value
+    );
     // console.log(message);
-    setErrorMessage(message);
+
+    if (message) return;
+
+    // sign in / sing up logic
+    if (!isSignInForm) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: fullname.current.value,
+            photoURL:
+              "https://media.licdn.com/dms/image/v2/D5603AQEU2M20sDkEqA/profile-displayphoto-scale_200_200/B56ZjRBICQG4AY-/0/1755853392813?e=2147483647&v=beta&t=S-MZXYy4cqnUvEhRh73bWLdT3ZeXQKqUfT9G3U2EQAA",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      // sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          const { uid, email, displayName, photoURL } = auth.currentUser;
+          dispatch(
+            addUser({
+              uid: uid,
+              email: email,
+              displayName: displayName,
+              photoURL: photoURL,
+            })
+          );
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
+
+    if (message) {
+      setErrorMessage(message);
+    }
   };
 
   return (
@@ -46,7 +137,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
-          ref={fullname}
+            ref={fullname}
             type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-700 rounded-md "
