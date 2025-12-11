@@ -38,7 +38,10 @@ const Login = () => {
     );
     // console.log(message);
 
-    if (message) return;
+    if (message) {
+      setErrorMessage(message);
+      return;
+    }
 
     // sign in / sing up logic
     if (!isSignInForm) {
@@ -72,6 +75,9 @@ const Login = () => {
             })
             .catch((error) => {
               // An error occurred
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              setErrorMessage(errorCode + "-" + errorMessage);
               // ...
             });
           // ...
@@ -110,10 +116,6 @@ const Login = () => {
           setErrorMessage(errorCode + "-" + errorMessage);
         });
     }
-
-    if (message) {
-      setErrorMessage(message);
-    }
   };
 
   return (
@@ -145,13 +147,13 @@ const Login = () => {
         )}
         <input
           ref={email}
-          type="text"
+          type="email"
           placeholder="Email Address"
           className="p-4 my-4 w-full bg-gray-700 rounded-md "
         />
         <input
           ref={password}
-          type="text"
+          type="password"
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-700 rounded-md "
         />
