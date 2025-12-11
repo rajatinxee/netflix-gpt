@@ -16,7 +16,11 @@
 - created redux store with user slice
 - implemented sign out
 - update profile
-<!-- - fetch from tmdb movies -->
+- bug fix: sign up user display name and profile picture update
+- bug fix: if the user is not logged in - redirect /browse to login page - vice versa
+- unsubscribed to the onAuthStateChanged callback
+- add hard coded values to the constant file
+-
 
 
 

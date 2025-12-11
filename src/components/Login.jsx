@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/Redux/userSlice";
+import { USER_LOGO } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -56,8 +55,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: fullname.current.value,
-            photoURL:
-              "https://media.licdn.com/dms/image/v2/D5603AQEU2M20sDkEqA/profile-displayphoto-scale_200_200/B56ZjRBICQG4AY-/0/1755853392813?e=2147483647&v=beta&t=S-MZXYy4cqnUvEhRh73bWLdT3ZeXQKqUfT9G3U2EQAA",
+            photoURL: USER_LOGO,
           })
             .then(() => {
               // Profile updated!
@@ -70,7 +68,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
               // ...
             })
             .catch((error) => {
@@ -107,7 +104,6 @@ const Login = () => {
               photoURL: photoURL,
             })
           );
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -147,13 +143,13 @@ const Login = () => {
         )}
         <input
           ref={email}
-          type="email"
+          type="text"
           placeholder="Email Address"
           className="p-4 my-4 w-full bg-gray-700 rounded-md "
         />
         <input
           ref={password}
-          type="password"
+          type="text"
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-700 rounded-md "
         />
