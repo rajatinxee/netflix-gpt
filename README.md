@@ -20,7 +20,8 @@
 - bug fix: if the user is not logged in - redirect /browse to login page - vice versa
 - unsubscribed to the onAuthStateChanged callback
 - add hard coded values to the constant file
--
+- register in tmdb api & create a new app & get access token 
+- get data from tmdb now playing movies list api
 
 
 
