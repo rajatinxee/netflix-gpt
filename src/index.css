@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide scrollbars while keeping scrolling enabled (horizontal & vertical)
+	 - IE/Edge: -ms-overflow-style
+	 - Firefox: scrollbar-width
+	 - WebKit: hide the scrollbar track
+*/
+.hide-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+	height: 0; /* hide horizontal scrollbar on WebKit */
+	width: 0; /* hide vertical scrollbar on WebKit */
+	display: none;
+}

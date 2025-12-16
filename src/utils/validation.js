@@ -1,22 +1,22 @@
-
 export const checkValidData = (fullname, email, password) => {
+  if (fullname !== null && fullname.length <= 3) {
+    return "Enter a valid Full Name";
+  }
 
-    if(fullname !== null && fullname.length <= 3){
-        return "Enter a valid Full Name";
-    }
+  const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+    email
+  );
 
-    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  const isPasswordValid =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
 
-    const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
+  if (!isEmailValid) {
+    return "Enter a valid Email Id";
+  }
 
-    if(!isEmailValid){
-        return "Enter a valid Email Id";
-    }
+  if (!isPasswordValid) {
+    return "Enter a strong Password";
+  }
 
-    if(!isPasswordValid){
-        return "Enter a strong Password";
-    }
-
-    return null;
-
-}
+  return null;
+};

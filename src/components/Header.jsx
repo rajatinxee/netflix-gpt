@@ -38,29 +38,24 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browse")
+        navigate("/browse");
         // ...
       } else {
         // User is signed out
         dispatch(removeUser());
-        navigate("/")
+        navigate("/");
         // ...
       }
     });
 
     // unsubscribe when component unmounts
     return () => unsubscribe();
-
   }, []);
 
   return (
     <>
       <div className="absolute flex justify-between z-20 w-screen px-8 py-2 bg-gradient-to-b from-black">
-        <img
-          src = {LOGO}
-          alt="logo"
-          className="w-44 "
-        />
+        <img src={LOGO} alt="logo" className="w-44 " />
 
         {user && (
           <div className="flex p-2 gap-2 items-center ">
