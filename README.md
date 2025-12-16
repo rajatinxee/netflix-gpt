@@ -22,6 +22,14 @@
 - add hard coded values to the constant file
 - register in tmdb api & create a new app & get access token 
 - get data from tmdb now playing movies list api
+- custom hook for now playing movies
+- create a movie slice
+- update the store with movie data
+- planning for main and secondary container
+- fetch data for trailer video
+- update store with trailer video data
+- embedded youtube video link and make it autoplay and mute
+- 
 
 
 
