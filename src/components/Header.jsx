@@ -59,9 +59,11 @@ const Header = () => {
 
         {user && (
           <div className="flex p-2 gap-2 items-center ">
+            <div className="text-white font-semibold mr-2">
+              {user?.displayName || (user?.email ? user.email.split("@")[0] : "User")}
+            </div>
             <img
-              className="w-12 h-12 "
-              // src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
+              className="w-12 h-12 rounded-full"
               src={user?.photoURL}
               alt="user-icon"
             />
