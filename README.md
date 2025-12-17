@@ -33,6 +33,8 @@
 - tmdb image cdn url
 - applied tailwind to brower page
 - created usePopularMovies, useTopRatedMovies etc for other type of movies
+- gpt search feature
+
 
 # FEATURES
 
