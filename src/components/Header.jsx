@@ -4,13 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/Redux/userSlice";
-import { LOGO } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/Redux/gptSlice";
+import { changeLanguage } from "../utils/Redux/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -54,10 +57,14 @@ const Header = () => {
   }, []);
 
   const handleGptSearchToggle = () => {
-    // toggle gpt search 
+    // toggle gpt search
     dispatch(toggleGptSearchView());
-  }
+  };
 
+  const handleLanguageChange = (e) => {
+    // console.log(e.target.value);
+    dispatch(changeLanguage(e.target.value));
+  };
 
   return (
     <>
@@ -66,10 +73,25 @@ const Header = () => {
 
         {user && (
           <div className="flex p-2 gap-2 items-center ">
+            {showGptSearch && (
+              <select
+                className="p-2 m-2 bg-gray-900 text-white rounded-md cursor-pointer"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            )}
+
             <div>
-              <button className="py-2 px-4 mx-4 text-white bg-purple-700 rounded-md"
-              onClick={handleGptSearchToggle}>
-                GPT Search
+              <button
+                className="py-2 px-4 mx-4 text-white bg-purple-700 rounded-md"
+                onClick={handleGptSearchToggle}
+              >
+                {showGptSearch ? "Home Page" : "GPT Search"}
               </button>
             </div>
 

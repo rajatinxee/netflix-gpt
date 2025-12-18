@@ -32,8 +32,11 @@
 - built movie card
 - tmdb image cdn url
 - applied tailwind to brower page
-- created usePopularMovies, useTopRatedMovies etc for other type of movies
-- gpt search feature
+- created usePopularMovies, useTopRatedMovies etc custom hooks for other type of movies
+- gpt search page
+- gpt search bar
+- multi-language feature
+- integrate gpt apis (get open ai key)
 
 
 # FEATURES
