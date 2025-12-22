@@ -30,6 +30,7 @@ const Header = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("Auth state changed:", user);
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
@@ -46,8 +47,9 @@ const Header = () => {
         // ...
       } else {
         // User is signed out
+        console.log("User signed out, redirecting to login");
         dispatch(removeUser());
-        navigate("/");
+        navigate("/"); // Temporarily commented out
         // ...
       }
     });

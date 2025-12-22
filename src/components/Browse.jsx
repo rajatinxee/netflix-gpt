@@ -18,6 +18,7 @@ const Browse = () => {
 
   return (
     <>
+      <div>Browse component is rendering</div>
       <Header />
 
       {showGptSearch ? (
@@ -28,6 +29,10 @@ const Browse = () => {
           <SecondaryContainer />
         </>
       )}
+{/* 
+      <GptSearch />
+      <MainContainer />
+      <SecondaryContainer /> */}
     </>
   );
 };
